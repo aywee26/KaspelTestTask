@@ -1,4 +1,6 @@
 ﻿using KaspelTestTask.Domain.Entities;
+using KaspelTestTask.Infrastructure.Comparers;
+using KaspelTestTask.Infrastructure.Converters;
 using Microsoft.EntityFrameworkCore;
 
 namespace KaspelTestTask.Infrastructure;
@@ -15,7 +17,7 @@ public class AppDbContext : DbContext
     {
         modelBuilder.Entity<Book>().HasKey(b => b.Id);
         modelBuilder.Entity<Book>().Property(b => b.Title).HasMaxLength(200).IsRequired();
-        modelBuilder.Entity<Book>().Ignore(b => b.PublicationDate);
+        modelBuilder.Entity<Book>().Property(b => b.PublicationDate).HasConversion<DateOnlyConverter, DateOnlyComparer>();
         base.OnModelCreating(modelBuilder);
     }
 }
