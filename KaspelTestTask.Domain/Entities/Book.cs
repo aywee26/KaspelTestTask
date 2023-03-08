@@ -20,4 +20,6 @@ public class Book
     public string Title { get; private set; } = default!;
 
     public DateOnly PublicationDate { get; private set; } = default;
+
+    public ICollection<OrderedBook> OrderedBooks { get; set; } = default!;
 }
