@@ -1,4 +1,6 @@
 ﻿using KaspelTestTask.Application.Features.BookService.Queries;
+using KaspelTestTask.Application.Features.OrderService.Commands;
+using KaspelTestTask.Application.Features.OrderService.Models;
 using KaspelTestTask.Application.Features.OrderService.Queries;
 using KaspelTestTask.Domain.Entities;
 using MediatR;
@@ -29,4 +31,9 @@ public class OrderController : ControllerBase
         return await _mediator.Send(new GetFilteredOrdersQuery(id, orderDate), cancellationToken);
     }
 
+    [HttpPost]
+    public async Task<Order?> CreateOrder(IEnumerable<OrderedBookBrief> orderedBooks, CancellationToken cancellationToken)
+    {
+        return await _mediator.Send(new CreateOrderCommand(orderedBooks), cancellationToken);
+    }
 }

@@ -35,4 +35,12 @@ public class OrdersRepository : IOrdersRepository
 
         return await query.ToListAsync(cancellationToken);
     }
+
+    public async Task<Order?> CreateOrder(Order order, IEnumerable<OrderedBook> orderedBooks, CancellationToken cancellationToken = default)
+    {
+        var result = await _dbContext.Orders.AddAsync(order, cancellationToken);
+        order.OrderedBooks = orderedBooks.ToList();
+        await _dbContext.SaveChangesAsync(cancellationToken);
+        return result.Entity;
+    }
 }
