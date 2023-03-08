@@ -2,7 +2,7 @@
 
 namespace KaspelTestTask.Application.Repositories.Abstractions;
 
-public interface IBookRepository
+public interface IBooksRepository
 {
     Task<Book?> GetBookByIdAsync(Guid id, CancellationToken cancellationToken = default);
 

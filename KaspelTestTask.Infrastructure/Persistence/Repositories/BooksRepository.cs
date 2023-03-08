@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KaspelTestTask.Infrastructure.Persistence.Repositories;
 
-public class BookRepository : IBookRepository
+public class BooksRepository : IBooksRepository
 {
     private readonly AppDbContext _dbContext;
 
-    public BookRepository(AppDbContext dbContext)
+    public BooksRepository(AppDbContext dbContext)
     {
         _dbContext = Guard.Against.Null(dbContext, nameof(dbContext));
     }

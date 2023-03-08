@@ -9,9 +9,9 @@ public record GetFilteredBooksQuery(string? Title, DateOnly? PublicationDate) : 
 {
     public class Handler : IRequestHandler<GetFilteredBooksQuery, IEnumerable<Book>>
     {
-        private readonly IBookRepository _bookRepository;
+        private readonly IBooksRepository _bookRepository;
 
-        public Handler(IBookRepository bookRepository)
+        public Handler(IBooksRepository bookRepository)
         {
             _bookRepository = bookRepository;
         }

@@ -9,9 +9,9 @@ public record GetBookByIdQuery(Guid Id) : IRequest<Book?>
 {
     public class Handler : IRequestHandler<GetBookByIdQuery, Book?>
     {
-        private readonly IBookRepository _bookRepository;
+        private readonly IBooksRepository _bookRepository;
 
-        public Handler(IBookRepository bookRepository)
+        public Handler(IBooksRepository bookRepository)
         {
             _bookRepository = bookRepository;
         }

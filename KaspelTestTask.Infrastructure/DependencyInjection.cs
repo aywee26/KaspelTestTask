@@ -22,7 +22,7 @@ public static class DependencyInjection
                 return new AppDbContext(options);
             });
 
-        services.AddTransient<IBookRepository, BookRepository>();
+        services.AddTransient<IBooksRepository, BooksRepository>();
 
         return services;
     }
