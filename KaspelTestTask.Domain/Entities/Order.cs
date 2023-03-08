@@ -8,15 +8,15 @@ public class Order
     {
     }
 
-    public Order(Guid id, DateTime orderTime)
+    public Order(Guid id, DateTime orderDate)
     {
         Id = id;
-        OrderTime = orderTime;
+        OrderDate = orderDate;
     }
 
     public Guid Id { get; private set; } = Guid.NewGuid();
 
-    public DateTime OrderTime { get; private set; } = DateTime.UtcNow;
+    public DateTime OrderDate { get; private set; } = DateTime.UtcNow;
 
-    public ICollection<OrderedBook> OrderedBooks { get; private set; } = default!;
+    public ICollection<OrderedBook> OrderedBooks { get; set; } = default!;
 }
