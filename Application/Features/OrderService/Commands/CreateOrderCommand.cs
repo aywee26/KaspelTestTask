@@ -37,7 +37,7 @@ public record CreateOrderCommand(IEnumerable<OrderedBookRequestBrief> OrderedBoo
                     return null;
                 }
 
-                var orderBook = new OrderedBook(order.Id, order, bookFromRepo.Id, bookFromRepo, book.Quantity, 0m);
+                var orderBook = new OrderedBook(order.Id, order, bookFromRepo.Id, bookFromRepo, book.Quantity, bookFromRepo.Price);
                 orderBooks.Add(orderBook);
             }
 
