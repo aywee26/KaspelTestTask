@@ -14,11 +14,6 @@ public class OrdersRepository : IOrdersRepository
         _dbContext = Guard.Against.Null(appDbContext);
     }
 
-    public async Task<IEnumerable<Order>> GetAllOrdersAsync(CancellationToken cancellationToken = default)
-    {
-        return await _dbContext.Orders.ToListAsync(cancellationToken);
-    }
-
     public async Task<IEnumerable<Order>> GetFilteredOrdersAsync(Guid? id = null, DateOnly? orderDate = null, CancellationToken cancellationToken = default)
     {
         IQueryable<Order> query = _dbContext.Orders;

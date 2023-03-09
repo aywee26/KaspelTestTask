@@ -1,3 +1,3 @@
 ﻿namespace KaspelTestTask.Application.Features.OrderService.Models;
 
-public record OrderedBookBrief(Guid BookId, int Quantity);
+public record OrderedBookRequestBrief(Guid BookId, int Quantity);

@@ -6,7 +6,7 @@ using MediatR;
 
 namespace KaspelTestTask.Application.Features.OrderService.Commands;
 
-public record CreateOrderCommand(IEnumerable<OrderedBookBrief> OrderedBooks) : IRequest<Order?>
+public record CreateOrderCommand(IEnumerable<OrderedBookRequestBrief> OrderedBooks) : IRequest<Order?>
 {
     public class Handler : IRequestHandler<CreateOrderCommand, Order?>
     {

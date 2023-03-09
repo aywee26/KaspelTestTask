@@ -4,9 +4,9 @@ using KaspelTestTask.Domain.Entities;
 
 namespace KaspelTestTask.Application.Features.BookService.Profiles;
 
-public class ClientProfile : Profile
+public class BookProfile : Profile
 {
-    public ClientProfile()
+    public BookProfile()
     {
         CreateMap<Book, BookBrief>()
             .ConstructUsing(b => new BookBrief(b.Id, b.Title, b.PublicationDate));
