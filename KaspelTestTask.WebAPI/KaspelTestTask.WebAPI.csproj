@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application\KaspelTestTask.Application.csproj" />
+    <ProjectReference Include="..\KaspelTestTask.Application\KaspelTestTask.Application.csproj" />
     <ProjectReference Include="..\KaspelTestTask.Infrastructure\KaspelTestTask.Infrastructure.csproj" />
   </ItemGroup>
 

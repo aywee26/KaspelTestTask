@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KaspelTestTask.WebAPI", "KaspelTestTask\KaspelTestTask.WebAPI.csproj", "{87822473-C725-46C7-8C84-CFA8C3CD80A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KaspelTestTask.WebAPI", "KaspelTestTask.WebAPI\KaspelTestTask.WebAPI.csproj", "{87822473-C725-46C7-8C84-CFA8C3CD80A3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KaspelTestTask.Domain", "KaspelTestTask.Domain\KaspelTestTask.Domain.csproj", "{9B1A880B-14CC-462A-8337-AB7AE87D6335}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KaspelTestTask.Application", "Application\KaspelTestTask.Application.csproj", "{E99E2A2C-420C-4666-9577-41B09B5A1EEA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KaspelTestTask.Application", "KaspelTestTask.Application\KaspelTestTask.Application.csproj", "{E99E2A2C-420C-4666-9577-41B09B5A1EEA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KaspelTestTask.Infrastructure", "KaspelTestTask.Infrastructure\KaspelTestTask.Infrastructure.csproj", "{A4140B51-3BBF-4823-B1B8-527414F2B518}"
 EndProject
