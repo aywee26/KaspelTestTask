@@ -33,10 +33,6 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<OrderedBook>()
             .HasKey(ob => new { ob.BookId, ob.OrderId });
         modelBuilder.Entity<OrderedBook>()
-            .HasOne(ob => ob.Book)
-            .WithMany(b => b.OrderedBooks)
-            .HasForeignKey(ob => ob.BookId);
-        modelBuilder.Entity<OrderedBook>()
             .HasOne(ob => ob.Order)
             .WithMany(o => o.OrderedBooks)
             .HasForeignKey(ob => ob.OrderId);

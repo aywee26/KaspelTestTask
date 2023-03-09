@@ -26,6 +26,4 @@ public class Book
     public DateOnly PublicationDate { get; private set; }
 
     public decimal Price { get; private set; }
-
-    public ICollection<OrderedBook> OrderedBooks { get; set; } = default!;
 }
