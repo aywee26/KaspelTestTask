@@ -5,7 +5,7 @@ using MediatR;
 
 namespace KaspelTestTask.Application.Features.BookService.Queries;
 
-public record GetFilteredOrdersQuery(Guid? OrderId, DateTime? OrderDate) : IRequest<IEnumerable<Order>>
+public record GetFilteredOrdersQuery(Guid? OrderId, DateOnly? OrderDate) : IRequest<IEnumerable<Order>>
 {
     public class Handler : IRequestHandler<GetFilteredOrdersQuery, IEnumerable<Order>>
     {

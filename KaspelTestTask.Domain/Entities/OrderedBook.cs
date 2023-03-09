@@ -17,13 +17,13 @@ public class OrderedBook
         Quantity = quantity;
     }
 
-    public Guid OrderId { get; private set; } = default;
+    public Guid OrderId { get; private set; }
 
     public Order Order { get; private set; } = default!;
 
 
-    public Guid BookId { get; private set; } = default;  
+    public Guid BookId { get; private set; }
     public Book Book { get; private set; } = default!;
 
-    public int Quantity { get; private set; } = default;
+    public int Quantity { get; private set; }
 }

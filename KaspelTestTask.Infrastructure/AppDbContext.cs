@@ -22,7 +22,7 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Book>().Property(b => b.PublicationDate).HasConversion<DateOnlyConverter, DateOnlyComparer>();
 
         modelBuilder.Entity<Order>().HasKey(ord => ord.Id);
-        modelBuilder.Entity<Order>().Property(ord => ord.OrderDate).IsRequired();
+        modelBuilder.Entity<Order>().Property(ord => ord.OrderDate).HasConversion<DateOnlyConverter, DateOnlyComparer>();
 
         modelBuilder.Entity<OrderedBook>()
             .HasKey(ob => new { ob.BookId, ob.OrderId });
@@ -34,7 +34,6 @@ public class AppDbContext : DbContext
             .HasOne(ob => ob.Order)
             .WithMany(o => o.OrderedBooks)
             .HasForeignKey(ob => ob.OrderId);
-
 
         base.OnModelCreating(modelBuilder);
     }

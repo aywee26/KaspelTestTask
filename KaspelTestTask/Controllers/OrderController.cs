@@ -26,7 +26,7 @@ public class OrderController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IEnumerable<Order>> GetFilteredOrders(Guid? id, DateTime? orderDate, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Order>> GetFilteredOrders(Guid? id, DateOnly? orderDate, CancellationToken cancellationToken)
     {
         return await _mediator.Send(new GetFilteredOrdersQuery(id, orderDate), cancellationToken);
     }

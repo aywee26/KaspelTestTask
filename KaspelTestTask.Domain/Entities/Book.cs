@@ -15,11 +15,11 @@ public class Book
         PublicationDate = publicationDate;
     }
 
-    public Guid Id { get; private set; } = Guid.NewGuid();
+    public Guid Id { get; private set; }
 
     public string Title { get; private set; } = default!;
 
-    public DateOnly PublicationDate { get; private set; } = default;
+    public DateOnly PublicationDate { get; private set; }
 
     public ICollection<OrderedBook> OrderedBooks { get; set; } = default!;
 }

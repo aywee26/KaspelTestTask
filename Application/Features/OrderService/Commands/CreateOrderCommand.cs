@@ -23,7 +23,7 @@ public record CreateOrderCommand(IEnumerable<OrderedBookBrief> OrderedBooks) : I
         {
             Guard.Against.Null(request);
 
-            var order = new Order(Guid.NewGuid(), DateTime.UtcNow);
+            var order = new Order(Guid.NewGuid(), DateOnly.FromDateTime(DateTime.UtcNow));
             var orderBooks = new List<OrderedBook>(request.OrderedBooks.Count());
 
             foreach (var book in request.OrderedBooks)
