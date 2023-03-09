@@ -1,6 +1,5 @@
 using KaspelTestTask.Application;
 using KaspelTestTask.Infrastructure;
-using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,10 +8,8 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddControllers();
-#warning band-aid fix: get rid of circular reference by outputting cleaner result at GetFilteredOrders and CreateOrder
-builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
-// DateOnly as ISO 8601 string supports
+// DateOnly as ISO 8601 string support
 builder.Services.AddDateOnlyTimeOnlyStringConverters();
 
 builder.Services.AddEndpointsApiExplorer();
