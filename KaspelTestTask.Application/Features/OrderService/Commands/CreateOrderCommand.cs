@@ -31,10 +31,15 @@ public record CreateOrderCommand(IEnumerable<OrderedBookRequestBrief> OrderedBoo
 
             foreach (var book in request.OrderedBooks)
             {
+                if (book.Quantity <= 0)
+                {
+                    throw new ArgumentException("Quantity cannot be less or equal 0.", nameof(book.Quantity));
+                }
+
                 var bookFromRepo = await _booksRepository.GetBookByIdAsync(book.BookId);
                 if (bookFromRepo is null)
                 {
-                    return null;
+                    throw new ArgumentException("Book with ID was not found.", nameof(book.BookId));
                 }
 
                 var orderBook = new OrderedBook(order.Id, order, bookFromRepo.Id, bookFromRepo, book.Quantity, bookFromRepo.Price);
