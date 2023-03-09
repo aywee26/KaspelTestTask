@@ -1,6 +1,4 @@
-﻿using Ardalis.GuardClauses;
-
-namespace KaspelTestTask.Domain.Entities;
+﻿namespace KaspelTestTask.Domain.Entities;
 
 public class Order
 {

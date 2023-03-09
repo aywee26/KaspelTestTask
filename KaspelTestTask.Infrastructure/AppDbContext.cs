@@ -19,10 +19,16 @@ public class AppDbContext : DbContext
     {
         modelBuilder.Entity<Book>().HasKey(b => b.Id);
         modelBuilder.Entity<Book>().Property(b => b.Title).HasMaxLength(200).IsRequired();
+        modelBuilder.Entity<Book>().Property(b => b.Author).HasMaxLength(200).IsRequired();
         modelBuilder.Entity<Book>().Property(b => b.PublicationDate).HasConversion<DateOnlyConverter, DateOnlyComparer>();
+        modelBuilder.Entity<Book>().Property(b => b.PublicationDate).IsRequired();
+        modelBuilder.Entity<Book>().Property(b => b.Price).IsRequired();
+        modelBuilder.Entity<Book>().Property(b => b.Price).HasPrecision(18, 4);
 
         modelBuilder.Entity<Order>().HasKey(ord => ord.Id);
         modelBuilder.Entity<Order>().Property(ord => ord.OrderDate).HasConversion<DateOnlyConverter, DateOnlyComparer>();
+        modelBuilder.Entity<Order>().Property(ord => ord.OrderDate).IsRequired();
+
 
         modelBuilder.Entity<OrderedBook>()
             .HasKey(ob => new { ob.BookId, ob.OrderId });
@@ -34,6 +40,13 @@ public class AppDbContext : DbContext
             .HasOne(ob => ob.Order)
             .WithMany(o => o.OrderedBooks)
             .HasForeignKey(ob => ob.OrderId);
+
+        modelBuilder.Entity<OrderedBook>()
+            .Property(ob => ob.Quantity).IsRequired();
+        modelBuilder.Entity<OrderedBook>()
+            .Property(ob => ob.Price).IsRequired();
+        modelBuilder.Entity<OrderedBook>()
+            .Property(ob => ob.Price).HasPrecision(18, 4);
 
         base.OnModelCreating(modelBuilder);
     }

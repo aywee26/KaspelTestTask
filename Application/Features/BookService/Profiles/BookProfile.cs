@@ -9,6 +9,6 @@ public class BookProfile : Profile
     public BookProfile()
     {
         CreateMap<Book, BookBrief>()
-            .ConstructUsing(b => new BookBrief(b.Id, b.Title, b.PublicationDate));
+            .ConstructUsing(b => new BookBrief(b.Id, b.Title, b.Author, b.PublicationDate, b.Price));
     }
 }

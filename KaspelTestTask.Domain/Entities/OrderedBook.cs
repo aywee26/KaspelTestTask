@@ -8,13 +8,14 @@ public class OrderedBook
     {
     }
 
-    public OrderedBook(Guid orderId, Order order, Guid bookId, Book book, int quantity)
+    public OrderedBook(Guid orderId, Order order, Guid bookId, Book book, int quantity, decimal price)
     {
         OrderId = orderId;
         Order = Guard.Against.Null(order);
         BookId = bookId;
         Book = Guard.Against.Null(book);
         Quantity = quantity;
+        Price = price;
     }
 
     public Guid OrderId { get; private set; }
@@ -26,4 +27,6 @@ public class OrderedBook
     public Book Book { get; private set; } = default!;
 
     public int Quantity { get; private set; }
+
+    public decimal Price { get; private set; }
 }

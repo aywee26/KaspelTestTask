@@ -2,7 +2,6 @@
 using AutoMapper;
 using KaspelTestTask.Application.Features.BookService.Models;
 using KaspelTestTask.Application.Repositories.Abstractions;
-using KaspelTestTask.Domain.Entities;
 using MediatR;
 
 namespace KaspelTestTask.Application.Features.BookService.Queries;
