@@ -3,6 +3,7 @@ using AutoMapper;
 using KaspelTestTask.Application.Features.OrderService.Models;
 using KaspelTestTask.Application.Repositories.Abstractions;
 using KaspelTestTask.Domain.Entities;
+using KaspelTestTask.Domain.Exceptions;
 using MediatR;
 
 namespace KaspelTestTask.Application.Features.OrderService.Commands;
@@ -33,13 +34,13 @@ public record CreateOrderCommand(IEnumerable<OrderedBookRequestBrief> OrderedBoo
             {
                 if (book.Quantity <= 0)
                 {
-                    throw new ArgumentException("Quantity cannot be less or equal 0.", nameof(book.Quantity));
+                    throw new InvalidQuantityException(book.Quantity);
                 }
 
                 var bookFromRepo = await _booksRepository.GetBookByIdAsync(book.BookId);
                 if (bookFromRepo is null)
                 {
-                    throw new ArgumentException("Book with ID was not found.", nameof(book.BookId));
+                    throw new BookNotFoundException(book.BookId);
                 }
 
                 var orderBook = new OrderedBook(order.Id, order, bookFromRepo.Id, bookFromRepo, book.Quantity, bookFromRepo.Price);
