@@ -1,3 +1,5 @@
-﻿namespace KaspelTestTask.Application.Features.OrderService.Models;
+﻿using KaspelTestTask.Domain.Entities;
 
-public record OrderBrief(Guid Id, DateOnly OrderDate);
+namespace KaspelTestTask.Application.Features.OrderService.Models;
+
+public record OrderBrief(Guid Id, DateOnly OrderDate, IEnumerable<OrderedBookBrief> OrderedBooks);

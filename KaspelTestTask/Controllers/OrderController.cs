@@ -26,7 +26,7 @@ public class OrderController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<Order?> CreateOrder(IEnumerable<OrderedBookRequestBrief> orderedBooks, CancellationToken cancellationToken)
+    public async Task<OrderBrief?> CreateOrder(IEnumerable<OrderedBookRequestBrief> orderedBooks, CancellationToken cancellationToken)
     {
         return await _mediator.Send(new CreateOrderCommand(orderedBooks), cancellationToken);
     }

@@ -9,6 +9,11 @@ public class OrderProfile : Profile
     public OrderProfile()
     {
         CreateMap<Order, OrderBrief>()
-            .ConstructUsing(o => new OrderBrief(o.Id, o.OrderDate));
+            .ConstructUsing(o =>
+                new OrderBrief(
+                    o.Id,
+                    o.OrderDate,
+                    o.OrderedBooks.Select(ob => new OrderedBookBrief(ob.BookId, ob.Quantity))
+             ));
     }
 }

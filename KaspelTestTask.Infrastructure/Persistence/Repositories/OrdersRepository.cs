@@ -28,6 +28,8 @@ public class OrdersRepository : IOrdersRepository
             query = query.Where(o => o.OrderDate.Equals(orderDate));
         }
 
+        query = query.Include(o => o.OrderedBooks);
+
         return await query.ToListAsync(cancellationToken);
     }
 

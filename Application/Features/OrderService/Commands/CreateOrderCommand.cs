@@ -1,4 +1,5 @@
 ﻿using Ardalis.GuardClauses;
+using AutoMapper;
 using KaspelTestTask.Application.Features.OrderService.Models;
 using KaspelTestTask.Application.Repositories.Abstractions;
 using KaspelTestTask.Domain.Entities;
@@ -6,20 +7,22 @@ using MediatR;
 
 namespace KaspelTestTask.Application.Features.OrderService.Commands;
 
-public record CreateOrderCommand(IEnumerable<OrderedBookRequestBrief> OrderedBooks) : IRequest<Order?>
+public record CreateOrderCommand(IEnumerable<OrderedBookRequestBrief> OrderedBooks) : IRequest<OrderBrief?>
 {
-    public class Handler : IRequestHandler<CreateOrderCommand, Order?>
+    public class Handler : IRequestHandler<CreateOrderCommand, OrderBrief?>
     {
         private readonly IOrdersRepository _ordersRepository;
         private readonly IBooksRepository _booksRepository;
+        private readonly IMapper _mapper;
 
-        public Handler(IOrdersRepository ordersRepository, IBooksRepository booksRepository)
+        public Handler(IOrdersRepository ordersRepository, IBooksRepository booksRepository, IMapper mapper)
         {
-            _ordersRepository = ordersRepository;
-            _booksRepository = booksRepository;
+            _ordersRepository = Guard.Against.Null(ordersRepository);
+            _booksRepository = Guard.Against.Null(booksRepository);
+            _mapper = Guard.Against.Null(mapper);
         }
 
-        public async Task<Order?> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+        public async Task<OrderBrief?> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             Guard.Against.Null(request);
 
@@ -38,7 +41,8 @@ public record CreateOrderCommand(IEnumerable<OrderedBookRequestBrief> OrderedBoo
                 orderBooks.Add(orderBook);
             }
 
-            var result = await _ordersRepository.CreateOrder(order, orderBooks, cancellationToken);
+            var createdOrder = await _ordersRepository.CreateOrder(order, orderBooks, cancellationToken);
+            var result = _mapper.Map<OrderBrief>(createdOrder);
             return result;
         }
     }
