@@ -1,5 +1,5 @@
-﻿using KaspelTestTask.Application.Features.BookService.Queries;
-using KaspelTestTask.Domain.Entities;
+﻿using KaspelTestTask.Application.Features.BookService.Models;
+using KaspelTestTask.Application.Features.BookService.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,13 +17,13 @@ public class BookController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<Book?> GetBook(Guid id, CancellationToken cancellationToken)
+    public async Task<BookBrief?> GetBook(Guid id, CancellationToken cancellationToken)
     {
         return await _mediator.Send(new GetBookByIdQuery(id), cancellationToken);
     }
 
     [HttpGet]
-    public async Task<IEnumerable<Book>> GetFilteredBooks(string? title, DateOnly? publicationDate, CancellationToken cancellationToken)
+    public async Task<IEnumerable<BookBrief>> GetFilteredBooks(string? title, DateOnly? publicationDate, CancellationToken cancellationToken)
     {
         return await _mediator.Send(new GetFilteredBooksQuery(title, publicationDate), cancellationToken);
     }

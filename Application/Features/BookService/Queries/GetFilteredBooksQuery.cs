@@ -1,25 +1,31 @@
 ﻿using Ardalis.GuardClauses;
+using AutoMapper;
+using KaspelTestTask.Application.Features.BookService.Models;
 using KaspelTestTask.Application.Repositories.Abstractions;
 using KaspelTestTask.Domain.Entities;
 using MediatR;
 
 namespace KaspelTestTask.Application.Features.BookService.Queries;
 
-public record GetFilteredBooksQuery(string? Title, DateOnly? PublicationDate) : IRequest<IEnumerable<Book>>
+public record GetFilteredBooksQuery(string? Title, DateOnly? PublicationDate) : IRequest<IEnumerable<BookBrief>>
 {
-    public class Handler : IRequestHandler<GetFilteredBooksQuery, IEnumerable<Book>>
+    public class Handler : IRequestHandler<GetFilteredBooksQuery, IEnumerable<BookBrief>>
     {
         private readonly IBooksRepository _bookRepository;
+        private readonly IMapper _mapper;
 
-        public Handler(IBooksRepository bookRepository)
+        public Handler(IBooksRepository bookRepository, IMapper mapper)
         {
-            _bookRepository = bookRepository;
+            _bookRepository = Guard.Against.Null(bookRepository);
+            _mapper = Guard.Against.Null(mapper);
         }
 
-        public async Task<IEnumerable<Book>> Handle(GetFilteredBooksQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<BookBrief>> Handle(GetFilteredBooksQuery request, CancellationToken cancellationToken)
         {
             Guard.Against.Null(request, nameof(request));
-            return await _bookRepository.GetFilteredBooksAsync(request.Title, request.PublicationDate, cancellationToken);
+            var books = await _bookRepository.GetFilteredBooksAsync(request.Title, request.PublicationDate, cancellationToken);
+            var result = _mapper.Map<IEnumerable<BookBrief>>(books);
+            return result;
         }
     }
 

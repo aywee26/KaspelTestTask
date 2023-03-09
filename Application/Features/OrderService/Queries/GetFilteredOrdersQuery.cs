@@ -3,7 +3,7 @@ using KaspelTestTask.Application.Repositories.Abstractions;
 using KaspelTestTask.Domain.Entities;
 using MediatR;
 
-namespace KaspelTestTask.Application.Features.BookService.Queries;
+namespace KaspelTestTask.Application.Features.OrderService.Queries;
 
 public record GetFilteredOrdersQuery(Guid? OrderId, DateOnly? OrderDate) : IRequest<IEnumerable<Order>>
 {
