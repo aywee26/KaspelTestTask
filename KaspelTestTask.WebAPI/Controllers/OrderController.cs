@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KaspelTestTask.WebAPI.Controllers;
 
-[Route("api/[controller]/[action]")]
+[Route("api/[controller]")]
 [ApiController]
 public class OrderController : ControllerBase
 {
@@ -19,8 +19,8 @@ public class OrderController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet]
-    public async Task<IEnumerable<OrderBrief>> GetFilteredOrders(Guid? id, DateOnly? orderDate, CancellationToken cancellationToken)
+    [HttpGet("")]
+    public async Task<IEnumerable<OrderBrief>> GetOrders(Guid? id, DateOnly? orderDate, CancellationToken cancellationToken)
     {
         return await _mediator.Send(new GetFilteredOrdersQuery(id, orderDate), cancellationToken);
     }
