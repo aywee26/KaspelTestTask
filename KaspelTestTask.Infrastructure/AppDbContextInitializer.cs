@@ -1,4 +1,5 @@
 ﻿using KaspelTestTask.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace KaspelTestTask.Infrastructure;
 
@@ -9,6 +10,18 @@ public class AppDbContextInitializer
     public AppDbContextInitializer(AppDbContext context)
     {
         _context = context;
+    }
+
+    public async Task ApplyMigrationsAsync()
+    {
+        try
+        {
+            await TryApplyMigrationsAsync();
+        }
+        catch
+        {
+            throw;
+        }
     }
 
     public async Task SeedAsync()
@@ -39,5 +52,10 @@ public class AppDbContextInitializer
             await _context.Books.AddRangeAsync(books);
             await _context.SaveChangesAsync();
         }
+    }
+
+    private async Task TryApplyMigrationsAsync()
+    {
+        await _context.Database.MigrateAsync();
     }
 }

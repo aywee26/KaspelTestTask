@@ -1,5 +1,6 @@
 using KaspelTestTask.Application;
 using KaspelTestTask.Infrastructure;
+using KaspelTestTask.WebAPI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,15 +18,14 @@ builder.Services.AddSwaggerGen(opt => opt.UseDateOnlyTimeOnlyStringConverters())
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    await scope.PrepareDatabase();
+}
+
 // Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI();
-
-using (var scope = app.Services.CreateScope())
-{
-    var initializer = scope.ServiceProvider.GetRequiredService<AppDbContextInitializer>();
-    await initializer.SeedAsync();
-}
 
 app.UseHttpsRedirection();
 
