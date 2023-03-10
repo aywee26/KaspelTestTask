@@ -24,8 +24,8 @@ public static class DependencyInjection
 
         services.AddScoped<AppDbContextInitializer>();
 
-        services.AddTransient<IBooksRepository, BooksRepository>();
-        services.AddTransient<IOrdersRepository, OrdersRepository>();
+        services.AddScoped<IBooksRepository, BooksRepository>();
+        services.AddScoped<IOrdersRepository, OrdersRepository>();
 
         return services;
     }
