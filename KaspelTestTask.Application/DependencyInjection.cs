@@ -1,6 +1,5 @@
 ﻿using Ardalis.GuardClauses;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 
 namespace KaspelTestTask.Application;
 
@@ -10,7 +9,7 @@ public static class DependencyInjection
     {
         Guard.Against.Null(services, nameof(services));
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
-        services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        services.AddAutoMapper(typeof(DependencyInjection).Assembly);
         return services;
     }
 }
