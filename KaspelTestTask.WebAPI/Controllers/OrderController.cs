@@ -17,6 +17,13 @@ public class OrderController : ControllerBase
         _mediator = mediator;
     }
 
+    [HttpGet("{id}")]
+    public async Task<ActionResult<OrderDto>> GetOrder(Guid id, CancellationToken cancellationToken)
+    {
+        var order = await _mediator.Send(new GetOrderByIdQuery(id), cancellationToken);
+        return order is null ? NotFound() : Ok(order);
+    }
+
     [HttpGet("")]
     public async Task<IEnumerable<OrderDto>> GetOrders(Guid? id, DateOnly? orderDate, CancellationToken cancellationToken)
     {
@@ -24,8 +31,9 @@ public class OrderController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<OrderDto?> CreateOrder(IEnumerable<OrderedBookRequestDto> orderedBooks, CancellationToken cancellationToken)
+    public async Task<ActionResult<OrderDto>> CreateOrder(IEnumerable<OrderedBookRequestDto> orderedBooks, CancellationToken cancellationToken)
     {
-        return await _mediator.Send(new CreateOrderCommand(orderedBooks), cancellationToken);
+        var order = await _mediator.Send(new CreateOrderCommand(orderedBooks), cancellationToken);
+        return Created($"/api/Order/{order!.Id}", order);
     }
 }

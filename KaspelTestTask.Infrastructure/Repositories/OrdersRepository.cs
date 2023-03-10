@@ -40,4 +40,14 @@ public class OrdersRepository : IOrdersRepository
         await _dbContext.SaveChangesAsync(cancellationToken);
         return result.Entity;
     }
+
+    public async Task<Order?> GetOrderByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        var query = _dbContext.Orders
+            .Where(o => o.Id == id)
+            .Include(o => o.OrderedBooks)
+            .ThenInclude(ob => ob.Book);
+
+        return await query.FirstOrDefaultAsync();
+    }
 }
