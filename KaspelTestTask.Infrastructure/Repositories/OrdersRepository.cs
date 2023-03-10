@@ -3,7 +3,7 @@ using KaspelTestTask.Application.Repositories.Abstractions;
 using KaspelTestTask.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace KaspelTestTask.Infrastructure.Persistence.Repositories;
+namespace KaspelTestTask.Infrastructure.Repositories;
 
 public class OrdersRepository : IOrdersRepository
 {

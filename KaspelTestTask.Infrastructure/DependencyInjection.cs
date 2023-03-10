@@ -1,6 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 using KaspelTestTask.Application.Repositories.Abstractions;
-using KaspelTestTask.Infrastructure.Persistence.Repositories;
+using KaspelTestTask.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
