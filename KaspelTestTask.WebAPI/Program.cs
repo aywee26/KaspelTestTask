@@ -1,12 +1,14 @@
 using KaspelTestTask.Application;
 using KaspelTestTask.Infrastructure;
 using KaspelTestTask.WebAPI.Extensions;
+using KaspelTestTask.WebAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
 
 builder.Services.AddControllers();
 
@@ -30,6 +32,8 @@ app.UseSwaggerUI();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
 app.MapControllers();
 
