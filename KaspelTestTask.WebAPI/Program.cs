@@ -21,6 +21,11 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
+using (var scope = app.Services.CreateScope())
+{
+    var initializer = scope.ServiceProvider.GetRequiredService<AppDbContextInitializer>();
+    await initializer.SeedAsync();
+}
 
 app.UseHttpsRedirection();
 
