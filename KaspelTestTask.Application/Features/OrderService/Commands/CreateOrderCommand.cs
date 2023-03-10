@@ -47,7 +47,7 @@ public record CreateOrderCommand(IEnumerable<OrderedBookRequestBrief> OrderedBoo
                 orderBooks.Add(orderBook);
             }
 
-            var createdOrder = await _ordersRepository.CreateOrder(order, orderBooks, cancellationToken);
+            var createdOrder = await _ordersRepository.CreateOrderAsync(order, orderBooks, cancellationToken);
             var result = _mapper.Map<OrderBrief>(createdOrder);
             return result;
         }
