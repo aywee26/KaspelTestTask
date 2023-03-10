@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using KaspelTestTask.Application.Features.BookService.Models;
+using KaspelTestTask.Application.Features.Books.Models;
 using KaspelTestTask.Domain.Entities;
 
-namespace KaspelTestTask.Application.Features.BookService.Profiles;
+namespace KaspelTestTask.Application.Features.Books.Profiles;
 
 public class BookProfile : Profile
 {

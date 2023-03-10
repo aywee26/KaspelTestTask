@@ -1,11 +1,10 @@
 ﻿using Ardalis.GuardClauses;
 using AutoMapper;
-using KaspelTestTask.Application.Features.OrderService.Models;
+using KaspelTestTask.Application.Features.Orders.Models;
 using KaspelTestTask.Application.Repositories.Abstractions;
-using KaspelTestTask.Domain.Entities;
 using MediatR;
 
-namespace KaspelTestTask.Application.Features.OrderService.Queries;
+namespace KaspelTestTask.Application.Features.Orders.Queries;
 
 public record GetFilteredOrdersQuery(Guid? OrderId, DateOnly? OrderDate) : IRequest<IEnumerable<OrderBrief>>
 {

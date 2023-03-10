@@ -1,5 +1,5 @@
-﻿using KaspelTestTask.Application.Features.BookService.Models;
-using KaspelTestTask.Application.Features.BookService.Queries;
+﻿using KaspelTestTask.Application.Features.Books.Models;
+using KaspelTestTask.Application.Features.Books.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

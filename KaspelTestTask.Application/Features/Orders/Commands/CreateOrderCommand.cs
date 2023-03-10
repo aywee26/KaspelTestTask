@@ -1,12 +1,12 @@
 ﻿using Ardalis.GuardClauses;
 using AutoMapper;
-using KaspelTestTask.Application.Features.OrderService.Models;
+using KaspelTestTask.Application.Features.Orders.Models;
 using KaspelTestTask.Application.Repositories.Abstractions;
 using KaspelTestTask.Domain.Entities;
 using KaspelTestTask.Domain.Exceptions;
 using MediatR;
 
-namespace KaspelTestTask.Application.Features.OrderService.Commands;
+namespace KaspelTestTask.Application.Features.Orders.Commands;
 
 public record CreateOrderCommand(IEnumerable<OrderedBookRequestBrief> OrderedBooks) : IRequest<OrderBrief?>
 {

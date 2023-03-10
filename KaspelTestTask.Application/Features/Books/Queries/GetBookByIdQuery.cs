@@ -1,10 +1,10 @@
 ﻿using Ardalis.GuardClauses;
 using AutoMapper;
-using KaspelTestTask.Application.Features.BookService.Models;
+using KaspelTestTask.Application.Features.Books.Models;
 using KaspelTestTask.Application.Repositories.Abstractions;
 using MediatR;
 
-namespace KaspelTestTask.Application.Features.BookService.Queries;
+namespace KaspelTestTask.Application.Features.Books.Queries;
 
 public record GetBookByIdQuery(Guid Id) : IRequest<BookBrief?>
 {

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using KaspelTestTask.Application.Features.OrderService.Models;
+using KaspelTestTask.Application.Features.Orders.Models;
 using KaspelTestTask.Domain.Entities;
 
 namespace KaspelTestTask.Application.Features.OrderService.Profiles;

@@ -1,8 +1,6 @@
-﻿using KaspelTestTask.Application.Features.BookService.Queries;
-using KaspelTestTask.Application.Features.OrderService.Commands;
-using KaspelTestTask.Application.Features.OrderService.Models;
-using KaspelTestTask.Application.Features.OrderService.Queries;
-using KaspelTestTask.Domain.Entities;
+﻿using KaspelTestTask.Application.Features.Orders.Commands;
+using KaspelTestTask.Application.Features.Orders.Models;
+using KaspelTestTask.Application.Features.Orders.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
