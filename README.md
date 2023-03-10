@@ -136,5 +136,6 @@ Response:
 - [ASP.NET Core 7](https://github.com/dotnet/aspnetcore) - .NET Foundation and Contributors
 - [Entity Framework Core 7](https://github.com/dotnet/efcore) - .NET Foundation and Contributors
 - [MediatR](https://github.com/jbogard/MediatR) - Jimmy Bogard
+- [AutoMapper](https://github.com/AutoMapper/AutoMapper) - Jimmy Bogard
 - [GuardClauses](https://github.com/ardalis/GuardClauses) - Steve Smith
 - [Clean Architecture](https://github.com/jasontaylordev/CleanArchitecture) - Jason Taylor
