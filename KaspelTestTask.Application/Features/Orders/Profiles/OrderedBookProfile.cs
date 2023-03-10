@@ -9,6 +9,6 @@ public class OrderedBookProfile : Profile
     public OrderedBookProfile()
     {
         CreateMap<OrderedBook, OrderedBookBrief>()
-            .ConstructUsing(ob => new OrderedBookBrief(ob.BookId, ob.Quantity, ob.Price));
+            .ConstructUsing(ob => new OrderedBookBrief(ob.BookId, ob.Book.Title, ob.Quantity, ob.Price));
     }
 }

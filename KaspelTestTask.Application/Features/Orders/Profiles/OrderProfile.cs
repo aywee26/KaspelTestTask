@@ -13,7 +13,7 @@ public class OrderProfile : Profile
                 new OrderBrief(
                     o.Id,
                     o.OrderDate,
-                    o.OrderedBooks.Select(ob => new OrderedBookBrief(ob.BookId, ob.Quantity, ob.Price))
+                    o.OrderedBooks.Select(ob => new OrderedBookBrief(ob.BookId, ob.Book.Title, ob.Quantity, ob.Price))
              ));
     }
 }

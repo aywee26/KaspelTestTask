@@ -28,7 +28,7 @@ public class OrdersRepository : IOrdersRepository
             query = query.Where(o => o.OrderDate.Equals(orderDate));
         }
 
-        query = query.Include(o => o.OrderedBooks);
+        query = query.Include(o => o.OrderedBooks).ThenInclude(ob => ob.Book);
 
         return await query.ToListAsync(cancellationToken);
     }
