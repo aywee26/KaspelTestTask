@@ -17,13 +17,13 @@ public class BookController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<BookBrief?> GetBook(Guid id, CancellationToken cancellationToken)
+    public async Task<BookDto?> GetBook(Guid id, CancellationToken cancellationToken)
     {
         return await _mediator.Send(new GetBookByIdQuery(id), cancellationToken);
     }
 
     [HttpGet("")]
-    public async Task<IEnumerable<BookBrief>> GetBooks(string? title, DateOnly? publicationDate, CancellationToken cancellationToken)
+    public async Task<IEnumerable<BookDto>> GetBooks(string? title, DateOnly? publicationDate, CancellationToken cancellationToken)
     {
         return await _mediator.Send(new GetFilteredBooksQuery(title, publicationDate), cancellationToken);
     }

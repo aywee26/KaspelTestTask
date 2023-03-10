@@ -8,9 +8,9 @@ using MediatR;
 
 namespace KaspelTestTask.Application.Features.Orders.Commands;
 
-public record CreateOrderCommand(IEnumerable<OrderedBookRequestBrief> OrderedBooks) : IRequest<OrderBrief?>
+public record CreateOrderCommand(IEnumerable<OrderedBookRequestDto> OrderedBooks) : IRequest<OrderDto?>
 {
-    public class Handler : IRequestHandler<CreateOrderCommand, OrderBrief?>
+    public class Handler : IRequestHandler<CreateOrderCommand, OrderDto?>
     {
         private readonly IOrdersRepository _ordersRepository;
         private readonly IBooksRepository _booksRepository;
@@ -23,7 +23,7 @@ public record CreateOrderCommand(IEnumerable<OrderedBookRequestBrief> OrderedBoo
             _mapper = Guard.Against.Null(mapper);
         }
 
-        public async Task<OrderBrief?> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+        public async Task<OrderDto?> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             Guard.Against.Null(request);
 
@@ -48,7 +48,7 @@ public record CreateOrderCommand(IEnumerable<OrderedBookRequestBrief> OrderedBoo
             }
 
             var createdOrder = await _ordersRepository.CreateOrderAsync(order, orderBooks, cancellationToken);
-            var result = _mapper.Map<OrderBrief>(createdOrder);
+            var result = _mapper.Map<OrderDto>(createdOrder);
             return result;
         }
     }

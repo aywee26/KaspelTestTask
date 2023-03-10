@@ -8,12 +8,12 @@ public class OrderProfile : Profile
 {
     public OrderProfile()
     {
-        CreateMap<Order, OrderBrief>()
+        CreateMap<Order, OrderDto>()
             .ConstructUsing(o =>
-                new OrderBrief(
+                new OrderDto(
                     o.Id,
                     o.OrderDate,
-                    o.OrderedBooks.Select(ob => new OrderedBookBrief(ob.BookId, ob.Book.Title, ob.Quantity, ob.Price))
+                    o.OrderedBooks.Select(ob => new OrderedBookDto(ob.BookId, ob.Book.Title, ob.Quantity, ob.Price))
              ));
     }
 }

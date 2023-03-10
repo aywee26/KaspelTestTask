@@ -18,13 +18,13 @@ public class OrderController : ControllerBase
     }
 
     [HttpGet("")]
-    public async Task<IEnumerable<OrderBrief>> GetOrders(Guid? id, DateOnly? orderDate, CancellationToken cancellationToken)
+    public async Task<IEnumerable<OrderDto>> GetOrders(Guid? id, DateOnly? orderDate, CancellationToken cancellationToken)
     {
         return await _mediator.Send(new GetFilteredOrdersQuery(id, orderDate), cancellationToken);
     }
 
     [HttpPost]
-    public async Task<OrderBrief?> CreateOrder(IEnumerable<OrderedBookRequestBrief> orderedBooks, CancellationToken cancellationToken)
+    public async Task<OrderDto?> CreateOrder(IEnumerable<OrderedBookRequestDto> orderedBooks, CancellationToken cancellationToken)
     {
         return await _mediator.Send(new CreateOrderCommand(orderedBooks), cancellationToken);
     }

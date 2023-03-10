@@ -6,9 +6,9 @@ using MediatR;
 
 namespace KaspelTestTask.Application.Features.Orders.Queries;
 
-public record GetFilteredOrdersQuery(Guid? OrderId, DateOnly? OrderDate) : IRequest<IEnumerable<OrderBrief>>
+public record GetFilteredOrdersQuery(Guid? OrderId, DateOnly? OrderDate) : IRequest<IEnumerable<OrderDto>>
 {
-    public class Handler : IRequestHandler<GetFilteredOrdersQuery, IEnumerable<OrderBrief>>
+    public class Handler : IRequestHandler<GetFilteredOrdersQuery, IEnumerable<OrderDto>>
     {
         private readonly IOrdersRepository _ordersRepository;
         private readonly IMapper _mapper;
@@ -19,11 +19,11 @@ public record GetFilteredOrdersQuery(Guid? OrderId, DateOnly? OrderDate) : IRequ
             _mapper = Guard.Against.Null(mapper);
         }
 
-        public async Task<IEnumerable<OrderBrief>> Handle(GetFilteredOrdersQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<OrderDto>> Handle(GetFilteredOrdersQuery request, CancellationToken cancellationToken)
         {
             Guard.Against.Null(request, nameof(request));
             var orders = await _ordersRepository.GetFilteredOrdersAsync(request.OrderId, request.OrderDate, cancellationToken);
-            var result = _mapper.Map<IEnumerable<OrderBrief>>(orders);
+            var result = _mapper.Map<IEnumerable<OrderDto>>(orders);
             return result;
         }
     }

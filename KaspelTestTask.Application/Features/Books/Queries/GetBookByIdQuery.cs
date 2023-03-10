@@ -6,9 +6,9 @@ using MediatR;
 
 namespace KaspelTestTask.Application.Features.Books.Queries;
 
-public record GetBookByIdQuery(Guid Id) : IRequest<BookBrief?>
+public record GetBookByIdQuery(Guid Id) : IRequest<BookDto?>
 {
-    public class Handler : IRequestHandler<GetBookByIdQuery, BookBrief?>
+    public class Handler : IRequestHandler<GetBookByIdQuery, BookDto?>
     {
         private readonly IBooksRepository _bookRepository;
         private readonly IMapper _mapper;
@@ -19,11 +19,11 @@ public record GetBookByIdQuery(Guid Id) : IRequest<BookBrief?>
             _mapper = Guard.Against.Null(mapper);
         }
 
-        public async Task<BookBrief?> Handle(GetBookByIdQuery request, CancellationToken cancellationToken)
+        public async Task<BookDto?> Handle(GetBookByIdQuery request, CancellationToken cancellationToken)
         {
             Guard.Against.Null(request, nameof(request));
             var book = await _bookRepository.GetBookByIdAsync(request.Id, cancellationToken);
-            var result = _mapper.Map<BookBrief>(book);
+            var result = _mapper.Map<BookDto>(book);
             return result;
         }
     }
