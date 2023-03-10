@@ -17,9 +17,10 @@ public class BookController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<BookDto?> GetBook(Guid id, CancellationToken cancellationToken)
+    public async Task<ActionResult<BookDto>> GetBook(Guid id, CancellationToken cancellationToken)
     {
-        return await _mediator.Send(new GetBookByIdQuery(id), cancellationToken);
+        var book = await _mediator.Send(new GetBookByIdQuery(id), cancellationToken);
+        return book is null ? NotFound() : Ok(book);
     }
 
     [HttpGet("")]
