@@ -6,12 +6,24 @@ using System.Text.Json;
 
 namespace KaspelTestTask.WebAPI.Middleware;
 
+/// <summary>
+/// Simple middleware that handles custom exceptions.
+/// </summary>
 public class GlobalExceptionHandlingMiddleware : IMiddleware
 {
+    /// <summary>
+    /// Constructor of GlobalExceptionHandlingMiddleware.
+    /// </summary>
     public GlobalExceptionHandlingMiddleware()
     {
     }
 
+    /// <summary>
+    /// Part of IMiddleware. Method tries to invoke RequestDelegate. If it goes wrong, ProblemDetails is returned.
+    /// </summary>
+    /// <param name="context"></param>
+    /// <param name="next"></param>
+    /// <returns></returns>
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
         try

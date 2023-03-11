@@ -1,6 +1,7 @@
 using KaspelTestTask.Application;
 using KaspelTestTask.Infrastructure;
 using KaspelTestTask.WebAPI.Middleware;
+using Microsoft.Extensions.PlatformAbstractions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,16 @@ builder.Services.AddControllers();
 builder.Services.AddDateOnlyTimeOnlyStringConverters();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(opt => opt.UseDateOnlyTimeOnlyStringConverters());
+builder.Services.AddSwaggerGen(opt =>
+{
+    // DateOnly as ISO 8601 string support
+    opt.UseDateOnlyTimeOnlyStringConverters();
+
+    // XML Documentation
+    var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+    var xmlPath = Path.Combine(basePath, "KaspelTestTask.WebAPI.xml");
+    opt.IncludeXmlComments(xmlPath);
+});
 
 var app = builder.Build();
 
