@@ -1,6 +1,5 @@
 using KaspelTestTask.Application;
 using KaspelTestTask.Infrastructure;
-using KaspelTestTask.WebAPI.Extensions;
 using KaspelTestTask.WebAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,7 +21,9 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    await scope.PrepareDatabase();
+    var initializer = scope.ServiceProvider.GetRequiredService<AppDbContextInitializer>();
+    await initializer.ApplyMigrationsAsync();
+    await initializer.SeedAsync();
 }
 
 // Configure the HTTP request pipeline.
