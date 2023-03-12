@@ -8,22 +8,16 @@ public class OrderedBook
     {
     }
 
-    public OrderedBook(Guid orderId, Order order, Guid bookId, Book book, int quantity, decimal price)
+    public OrderedBook(Order order, Book book, int quantity, decimal price)
     {
-        OrderId = orderId;
         Order = Guard.Against.Null(order);
-        BookId = bookId;
         Book = Guard.Against.Null(book);
         Quantity = quantity;
         Price = price;
     }
 
-    public Guid OrderId { get; private set; }
-
     public Order Order { get; private set; } = default!;
 
-
-    public Guid BookId { get; private set; }
     public Book Book { get; private set; } = default!;
 
     public int Quantity { get; private set; }

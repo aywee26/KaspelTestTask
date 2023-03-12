@@ -13,7 +13,7 @@ public class OrderProfile : Profile
                 new OrderDto(
                     o.Id,
                     o.OrderDate,
-                    o.OrderedBooks.Select(ob => new OrderedBookDto(ob.BookId, ob.Book.Title, ob.Quantity, ob.Price))
+                    o.OrderedBooks.Select(ob => new OrderedBookDto(ob.Book.Id, ob.Book.Title, ob.Quantity, ob.Price))
              ));
     }
 }

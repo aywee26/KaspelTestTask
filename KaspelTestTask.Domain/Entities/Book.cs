@@ -4,10 +4,6 @@ namespace KaspelTestTask.Domain.Entities;
 
 public class Book
 {
-    private Book()
-    {
-    }
-
     public Book(Guid id, string title, string author, DateOnly publicationDate, decimal price)
     {
         Id = id;
@@ -19,9 +15,9 @@ public class Book
 
     public Guid Id { get; private set; }
 
-    public string Title { get; private set; } = default!;
+    public string Title { get; private set; }
 
-    public string Author { get; private set; } = default!;
+    public string Author { get; private set; }
 
     public DateOnly PublicationDate { get; private set; }
 

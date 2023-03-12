@@ -9,6 +9,6 @@ public class OrderedBookProfile : Profile
     public OrderedBookProfile()
     {
         CreateMap<OrderedBook, OrderedBookDto>()
-            .ConstructUsing(ob => new OrderedBookDto(ob.BookId, ob.Book.Title, ob.Quantity, ob.Price));
+            .ConstructUsing(ob => new OrderedBookDto(ob.Book.Id, ob.Book.Title, ob.Quantity, ob.Price));
     }
 }

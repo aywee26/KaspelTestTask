@@ -43,7 +43,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Ord
                 throw new BookNotFoundException(book.BookId);
             }
 
-            var orderBook = new OrderedBook(order.Id, order, bookFromRepo.Id, bookFromRepo, book.Quantity, bookFromRepo.Price);
+            var orderBook = new OrderedBook(order, bookFromRepo, book.Quantity, bookFromRepo.Price);
             orderBooks.Add(orderBook);
         }
 

@@ -7,42 +7,38 @@ namespace KaspelTestTask.Infrastructure;
 
 public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions options) : base(options)
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
     }
 
+    #region DbSets
     public DbSet<Book> Books => Set<Book>();
 
     public DbSet<Order> Orders => Set<Order>();
+    #endregion
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Book>().HasKey(b => b.Id);
-        modelBuilder.Entity<Book>().Property(b => b.Title).HasMaxLength(200).IsRequired();
-        modelBuilder.Entity<Book>().Property(b => b.Author).HasMaxLength(200).IsRequired();
-        modelBuilder.Entity<Book>().Property(b => b.PublicationDate).HasConversion<DateOnlyConverter, DateOnlyComparer>();
-        modelBuilder.Entity<Book>().Property(b => b.PublicationDate).IsRequired();
-        modelBuilder.Entity<Book>().Property(b => b.Price).IsRequired();
-        modelBuilder.Entity<Book>().Property(b => b.Price).HasPrecision(18, 4);
+    {   
+        var book = modelBuilder.Entity<Book>();
+        book.HasKey(b => b.Id);
+        book.Property(b => b.Title).IsRequired().HasMaxLength(200);
+        book.Property(b => b.Author).IsRequired().HasMaxLength(200);
+        book.Property(b => b.PublicationDate).HasConversion<DateOnlyConverter, DateOnlyComparer>();
+        book.Property(b => b.PublicationDate).IsRequired();
+        book.Property(b => b.Price).IsRequired().HasPrecision(18, 4);
+        book.HasIndex(b => b.Title);
 
-        modelBuilder.Entity<Order>().HasKey(ord => ord.Id);
-        modelBuilder.Entity<Order>().Property(ord => ord.OrderDate).HasConversion<DateOnlyConverter, DateOnlyComparer>();
-        modelBuilder.Entity<Order>().Property(ord => ord.OrderDate).IsRequired();
+        var order = modelBuilder.Entity<Order>();
+        order.HasKey(ord => ord.Id);
+        order.Property(ord => ord.OrderDate).HasConversion<DateOnlyConverter, DateOnlyComparer>();
+        order.Property(ord => ord.OrderDate).IsRequired();
+        order.HasIndex(ord => ord.OrderDate);
 
-
-        modelBuilder.Entity<OrderedBook>()
-            .HasKey(ob => new { ob.BookId, ob.OrderId });
-        modelBuilder.Entity<OrderedBook>()
-            .HasOne(ob => ob.Order)
-            .WithMany(o => o.OrderedBooks)
-            .HasForeignKey(ob => ob.OrderId);
-
-        modelBuilder.Entity<OrderedBook>()
-            .Property(ob => ob.Quantity).IsRequired();
-        modelBuilder.Entity<OrderedBook>()
-            .Property(ob => ob.Price).IsRequired();
-        modelBuilder.Entity<OrderedBook>()
-            .Property(ob => ob.Price).HasPrecision(18, 4);
+        var orderedBook = modelBuilder.Entity<OrderedBook>();
+        orderedBook.HasKey("OrderId", "BookId");
+        orderedBook.HasOne(ob => ob.Order).WithMany(ord => ord.OrderedBooks).HasForeignKey("OrderId");
+        orderedBook.Property(ob => ob.Quantity).IsRequired();
+        orderedBook.Property(ob => ob.Price).IsRequired().HasPrecision(18, 4);
 
         base.OnModelCreating(modelBuilder);
     }

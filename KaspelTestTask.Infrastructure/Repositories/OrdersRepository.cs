@@ -35,8 +35,11 @@ public class OrdersRepository : IOrdersRepository
 
     public async Task<Order> CreateOrderAsync(Order order, IEnumerable<OrderedBook> orderedBooks, CancellationToken cancellationToken = default)
     {
+        foreach (var book in orderedBooks)
+        {
+            order.OrderedBooks.Add(book);
+        }
         var result = await _dbContext.Orders.AddAsync(order, cancellationToken);
-        order.OrderedBooks = orderedBooks.ToList();
         await _dbContext.SaveChangesAsync(cancellationToken);
         return result.Entity;
     }

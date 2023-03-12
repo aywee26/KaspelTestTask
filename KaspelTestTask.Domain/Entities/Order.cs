@@ -2,10 +2,6 @@
 
 public class Order
 {
-    private Order()
-    {
-    }
-
     public Order(Guid id, DateOnly orderDate)
     {
         Id = id;
@@ -16,5 +12,5 @@ public class Order
 
     public DateOnly OrderDate { get; private set; }
 
-    public ICollection<OrderedBook> OrderedBooks { get; set; } = default!;
+    public ICollection<OrderedBook> OrderedBooks { get; private set; } = new List<OrderedBook>();
 }
