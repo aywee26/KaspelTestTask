@@ -14,29 +14,10 @@ public class AppDbContextInitializer
 
     public async Task ApplyMigrationsAsync()
     {
-        try
-        {
-            await TryApplyMigrationsAsync();
-        }
-        catch
-        {
-            throw;
-        }
+        await _context.Database.MigrateAsync();
     }
 
     public async Task SeedAsync()
-    {
-        try
-        {
-            await TrySeedAsync();
-        }
-        catch
-        {
-            throw;
-        }
-    }
-
-    private async Task TrySeedAsync()
     {
         if (!_context.Books.Any())
         {
@@ -52,10 +33,5 @@ public class AppDbContextInitializer
             await _context.Books.AddRangeAsync(books);
             await _context.SaveChangesAsync();
         }
-    }
-
-    private async Task TryApplyMigrationsAsync()
-    {
-        await _context.Database.MigrateAsync();
     }
 }
