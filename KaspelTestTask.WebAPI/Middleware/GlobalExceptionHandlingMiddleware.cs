@@ -19,7 +19,7 @@ public class GlobalExceptionHandlingMiddleware : IMiddleware
     }
 
     /// <summary>
-    /// Part of IMiddleware. Method tries to invoke RequestDelegate. If it goes wrong, ProblemDetails is returned.
+    /// The method tries to invoke RequestDelegate. If it goes wrong, ProblemDetails is written to the response body.
     /// </summary>
     /// <param name="context"></param>
     /// <param name="next"></param>
