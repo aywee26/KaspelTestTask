@@ -29,7 +29,7 @@ public class BookController : ControllerBase
     /// <param name="id"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    /// <response code="200">Book object is returned</response>
+    /// <response code="200">Book is returned</response>
     /// <response code="404">Book with specified ID is not found</response>
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BookDto))]
@@ -46,7 +46,7 @@ public class BookController : ControllerBase
     /// <param name="title"></param>
     /// <param name="publicationDate"></param>
     /// <param name="cancellationToken"></param>
-    /// <response code="200">Array of book objects is returned</response>
+    /// <response code="200">Array of books is returned</response>
     /// <returns></returns>
     [HttpGet("")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<BookDto>))]
