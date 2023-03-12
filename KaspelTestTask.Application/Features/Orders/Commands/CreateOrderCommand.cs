@@ -8,9 +8,9 @@ using MediatR;
 
 namespace KaspelTestTask.Application.Features.Orders.Commands;
 
-public record CreateOrderCommand(IEnumerable<OrderedBookRequestDto> OrderedBooks) : IRequest<OrderDto?>;
+public record CreateOrderCommand(IEnumerable<OrderedBookRequestDto> OrderedBooks) : IRequest<OrderDto>;
 
-public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, OrderDto?>
+public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, OrderDto>
 {
     private readonly IOrdersRepository _ordersRepository;
     private readonly IBooksRepository _booksRepository;
@@ -23,7 +23,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Ord
         _mapper = Guard.Against.Null(mapper);
     }
 
-    public async Task<OrderDto?> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+    public async Task<OrderDto> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
         Guard.Against.Null(request);
 
