@@ -71,6 +71,7 @@ public class GlobalExceptionHandlingMiddleware : IMiddleware
         string json = JsonSerializer.Serialize(problemDetails);
 
         context!.Response.ContentType = "application/problem+json";
+        context!.Response.StatusCode = status;
 
         await context.Response.WriteAsync(json);
     }
